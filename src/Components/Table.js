@@ -2,15 +2,15 @@ import React from "react";
 
 const Table = ({ columns, data }) => {
   return (
-    <table className="table-auto border-collapse w-full ">
-      <thead >
-        <tr >
+    <table className="table-auto border-collapse w-full">
+      <thead>
+        <tr>
           {columns.map((col, index) => (
             <th
               key={index}
               className="border border-gray-300 px-4 py-2 text-center bg-[rgb(51,134,116)]"
             >
-              {col}
+              {col.name}
             </th>
           ))}
         </tr>
@@ -23,7 +23,8 @@ const Table = ({ columns, data }) => {
                 key={colIndex}
                 className="border border-gray-300 px-4 py-2 bg-transparent"
               >
-                {row[col]}
+                {/* Eğer bir işlem fonksiyonu varsa uygula, yoksa doğrudan değeri göster */}
+                {col.render ? col.render(row[col.key], row) : row[col.key]}
               </td>
             ))}
           </tr>
